@@ -53,6 +53,8 @@ The focus of this lab to curate lists of articles to read for users. People who 
 
 [Download video](http://s3-us-west-2.amazonaws.com/web-dev-readme-photos/sinatra/nyt-article-bookmarker.mp4)
 
+You can also visit a live demo [here](https://nyt-bookmarker.herokuapp.com/).
+
 ## Instructions
 
 The tests are written in order of increasing difficulty so get them to pass in order. Run your testing suite to get started.
