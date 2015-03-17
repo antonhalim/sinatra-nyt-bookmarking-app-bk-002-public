@@ -154,7 +154,8 @@ describe UsersController do
           :name => 'Maria W. Stewart',
           :avatar => 'http://zinnedproject.wpengine.netdna-cdn.com/wp-content/uploads/2011/12/mariastewart.jpg',
         }
-        @user = User.create(@attributes)
+        user = User.create(@attributes)
+        @user_id = user.id
         delete "/users/#{@user.id}"
         follow_redirect!
       end
@@ -168,12 +169,16 @@ describe UsersController do
       end
 
       it "deletes the user from the database" do
-        temp_attributes = @attributes
-        temp_attributes[:id] = @user.id
-        temp_attributes.each do |attribute, value|
+        @attributes[:id] = @user_id
+        @attributes.each do |attribute, value|
           found = User.find_by(attribute => value)
           expect(found).to be_nil
         end
+      end
+
+      it "delelets all the bookmarks that joined the user to articles" do
+        found_bookmarks = Bookmark.where(:user_id => @user_id)
+        expect(found_bookmarks).to be_empty
       end
     end
   end
