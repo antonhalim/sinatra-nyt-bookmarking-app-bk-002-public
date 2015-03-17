@@ -156,7 +156,7 @@ describe UsersController do
         }
         user = User.create(@attributes)
         @user_id = user.id
-        delete "/users/#{@user.id}"
+        delete "/users/#{user.id}"
         follow_redirect!
       end
 
