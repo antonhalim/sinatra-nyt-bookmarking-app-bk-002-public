@@ -1,2 +1,10 @@
 Gemfile.lock
 .env
+
+db/schema.rb
+db/bookmarker_development.sqlite
+db/bookmarker_test.sqlite
+
+*/.DS_Store
+.DS_Store
+.DS_Store?
