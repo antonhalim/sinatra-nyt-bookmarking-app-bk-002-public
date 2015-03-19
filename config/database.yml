@@ -1,3 +1,0 @@
-adapter: 'postgresql'
-host: 'localhost'
-database: 'bookmarker'

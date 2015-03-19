@@ -1,34 +1,37 @@
+ENV["SINATRA_ENV"] = "test"
+
 require_relative '../config/environment'
 require 'rake'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
-load './Rakefile'
 
 ActiveRecord::Base.logger.level = 2
 
 RSpec.configure do |config|
   config.include Capybara::DSL
-  config.before(:all) do
-    run_rake_task('db:drop')
-    run_rake_task('db:migrate')
-    run_rake_task('db:seed')
+
+  config.include Rack::Test::Methods
+  
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+    load_articles
   end
-  config.after(:all) do
-    run_rake_task('db:drop')
-    run_rake_task('db:migrate')
-    run_rake_task('db:seed')
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end
 
-def run_rake_task(task)
-  RAKE_APP[task].invoke
-  if task == 'db:migrate' || task == 'db:drop' || task == 'db:seed'
-    RAKE_APP[task].reenable
+def load_articles
+  articles = JSON.parse(File.read("db/articles.json"))
+  articles["results"].each_with_index do |article|
+    Article.create(article)
   end
 end
-
-include Rack::Test::Methods
 
 def app
   Rack::Builder.parse_file('config.ru').first

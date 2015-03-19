@@ -26,7 +26,7 @@ This lab uses a database called `bookmarker`. Go ahead and create that now:
 > createdb bookmarker
 ```
 
-This lab uses a key from the New York Times to seed the database with articles. 
+This lab uses a key from the New York Times to fetch the database with articles. Take a look at the rake task in `lib/tasks/fetch.rb` to see how this works.
 
 Make sure you register for a New York Times account [here](https://myaccount.nytimes.com/register?) if you don't already have one. Then click [here](http://developer.nytimes.com/apps/register) go get your key.
 
@@ -102,7 +102,7 @@ There will be three tables and models in this lab.
     2. user_id
     3. read (boolean)
 
-This is a test-driven lab so run your testing suite to get started.
+This is a test-driven lab so run your testing suite to get started. Once all your tests are passing, run `rake db:migrate`, `rake db:seed`, and `rake fetch`. This will add new articles to your development database. Then run your server and make sure the app functions!
 
 ## Resources
 
