@@ -10,6 +10,7 @@ gem 'pry'
 gem 'shotgun'
 gem 'dotenv'
 gem 'font-awesome-sass'
+gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 
 group :test do
   gem 'rspec'
