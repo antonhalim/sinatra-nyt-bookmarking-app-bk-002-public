@@ -33,7 +33,6 @@ describe Bookmark do
     it "deletes all the bookmarks associated with the object" do
       Bookmark.delete_associated_bookmarks(@avi)
       expect(@avi.bookmarks).to be_empty
-      expect(@avi.articles).to_not include(@first_article)
 
       Bookmark.delete_associated_bookmarks(@third_article)
       expect(Bookmark.where(:article_id => @third_article.id)).to be_empty
