@@ -36,8 +36,7 @@ describe Bookmark do
       expect(@avi.articles).to_not include(@first_article)
 
       Bookmark.delete_associated_bookmarks(@third_article)
-      expect(@third_article.bookmarks).to be_empty
-      expect(@third_article.users).to_not include(@steven)
+      expect(Bookmark.where(:article_id => @third_article.id)).to be_empty
     end 
   end
 end
